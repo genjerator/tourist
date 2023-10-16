@@ -15,10 +15,10 @@ build: ## Build all containers for DEV
 	@docker build --no-cache . -f ./Dockerfile.local
 
 build-prod: ## Build all containers for PROD
-	@docker build --no-cache . -f ./Dockerfile
+	docker compose build --no-cache
 
 start: ## Start all containers
-	@docker compose up --force-recreate -d
+	docker compose up --force-recreate -d
 
 fresh:  ## Destroy & recreate all uing dev containers.
 	make stop
@@ -33,14 +33,14 @@ fresh-prod: ## Destroy & recreate all using prod containers.
 	make start
 
 stop: ## Stop all containers
-	@docker compose stop
+	docker compose stop
 
 restart: stop start ## Restart all containers
 
 destroy: stop ## Destroy all containers
 
 ssh: ## SSH into PHP container
-	docker exec -it ${CONTAINER_PHP} sh
+	docker exec -it ${CONTAINER_PHP} /bin/bash
 
 install: ## Run composer install
 	docker exec ${CONTAINER_PHP} composer install
@@ -48,5 +48,5 @@ install: ## Run composer install
 migrate: ## Run migration files
 	docker exec ${CONTAINER_PHP} php artisan migrate
 
-migrate-fresh: ## Clear database and run all migrations
+migrate-fresh: ## Clear database and run all migrations aaaa
 	docker exec ${CONTAINER_PHP} php artisan migrate:fresh

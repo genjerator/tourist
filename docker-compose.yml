@@ -14,7 +14,8 @@ services:
             - 8000:8080
         depends_on:
             - database
-
+        environment:
+            - XDEBUG_CONFIG=mode=debug client_host=host.docker.internal idekey=phpstorm start_with_request=trigger remote_handler=dbgp client_port=9003
     #database services
     database:
         container_name: database
@@ -22,10 +23,10 @@ services:
         ports:
             - 3306:3306
         environment:
-            - MYSQL_DATABASE=$(DB_DATABASE)
-            - MYSQL_USER=$(DB_USERNAME)
-            - MYSQL_PASSWORD=$(DB_PASSWORD )
-            - MYSQL_ROOT_PASSWORD=$(DB_PASSWORD)
+            - MYSQL_DATABASE=laravel
+            - MYSQL_USER=geno
+            - MYSQL_PASSWORD=test
+            - MYSQL_ROOT_PASSWORD=test
         volumes:
             - db-data:/var/lib/mysql
 volumes:

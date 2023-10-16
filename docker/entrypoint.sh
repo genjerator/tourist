@@ -14,6 +14,9 @@ fi
 php artisan migrate
 php artisan optimize
 php artisan view:cache
+php artisan route:clear
+php artisan cache:clear
+php artisan config:clear
 
 php-fpm -D
 nginx -g "daemon off;"
